@@ -18,15 +18,13 @@ public class KeyStorage {
         ClassPathResource cpr = new ClassPathResource("/yandex.key");
         try {
             File file = cpr.getFile();
-            String s = new String(Files.readAllBytes(file.toPath()));
-            if (s != null) {
-                logger.info("Key loaded : {}", key);
-                key = s;
-            }
+            key = new String(Files.readAllBytes(file.toPath()));
+            logger.info("Key loaded : {}", key);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Key loading error:", e);
         }
     }
+
     public static String getKey() {
         return key;
     }
